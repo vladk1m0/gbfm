@@ -9,7 +9,7 @@ import (
 )
 
 var usage string =`
-usage: ./gbfm.sh [run|translate] file.bf
+usage: gbfm [run|translate] file.bf
 	run brainfuck program
 	translate brainfuck program into file.bf.js
 `
@@ -19,7 +19,7 @@ func printHelp() {
 }
 
 func main() {
-	if len(os.Args) < 3 {
+	if len(os.Args) != 3 {
 		printHelp()
 	}
 
