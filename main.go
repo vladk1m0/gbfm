@@ -10,8 +10,8 @@ import (
 
 var usage string =`
 usage: gbfm [run|translate] file.bf
-	run brainfuck program
-	translate brainfuck program into file.bf.js
+	run brainfuck program file.bf
+	translate brainfuck program file.bf into file.bf.js
 `
 func printHelp() {
 	fmt.Fprint(os.Stderr, usage)
@@ -34,13 +34,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	r, err := os.Open(finName)
+	in, err := os.Open(finName)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)
 	}
 
-	srcCode, err := ioutil.ReadAll(r)
+	srcCode, err := ioutil.ReadAll(in)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)
