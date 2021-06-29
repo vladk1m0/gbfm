@@ -1,0 +1,9 @@
+.vscode/
+.idea/
+target
+/target/
+/bin/
+debug
+debug.test
+/logs/
+test_data/*.js
