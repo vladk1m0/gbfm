@@ -42,7 +42,7 @@ Prerequisites for tests running:
 To run all tests use cmd:
 
 ```bash
-go test -v ./brainfuck
+go test -v ./...
 ```
 
 Licence

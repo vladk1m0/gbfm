@@ -7,6 +7,7 @@ import (
 type (
     Stack struct {
         top *Node
+        size uint
     }
 
     Node struct {
@@ -16,7 +17,7 @@ type (
 )
 
 func New() *Stack {
-    return &Stack{nil}
+    return &Stack{nil, 0}
 }
 
 func (s *Stack) Pop() (uint, error) {
@@ -26,6 +27,7 @@ func (s *Stack) Pop() (uint, error) {
 
     node := s.top
     s.top = node.prev
+    s.size--
 
     return node.value, nil
 }
@@ -33,5 +35,9 @@ func (s *Stack) Pop() (uint, error) {
 func (s *Stack) Push(value uint) {
     node := &Node{value,s.top}
     s.top = node
+    s.size++
 }
 
+func (s *Stack) Size() uint {
+    return s.size
+}

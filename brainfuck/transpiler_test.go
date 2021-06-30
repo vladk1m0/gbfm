@@ -7,7 +7,7 @@ import (
 	"os/exec"
 )
 
-func transpile(finName string, t *testing.T) {
+func transpileTest(finName string, t *testing.T) {
 	srcCode, err := ioutil.ReadFile(finName)
 	if err != nil {
 		t.Fatalf("parsing error %+v", err)
@@ -54,22 +54,18 @@ func transpile(finName string, t *testing.T) {
 }
 
 func TestTranspileHelloWorld(t *testing.T) {
-	finName := "../test_data/hello_world.bf"
-	transpile(finName, t)
+	transpileTest("../test_data/hello_world.bf", t)
 }
 
 func TestTranspile99bottles(t *testing.T) {
-	finName := "../test_data/99_bottles.bf"
-	transpile(finName, t)
+	transpileTest("../test_data/99_bottles.bf", t)
 }
 
 func TestTranspileFizzBuzz(t *testing.T) {
-	finName := "../test_data/fizz_buzz.bf"
-	transpile(finName, t)
+	transpileTest("../test_data/fizz_buzz.bf", t)
 }
 
 // Transpiling test timeout
 // func TestTranspileMandelbrot(t *testing.T) {
-// 	finName := "../test_data/mandelbrot.bf"
-// 	transpile(finName, t)
+// 	transpile("../test_data/mandelbrot.bf", t)
 // }

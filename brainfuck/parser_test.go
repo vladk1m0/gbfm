@@ -4,6 +4,24 @@ import (
 	"testing"
 )
 
+func parseTest(input string, t *testing.T, expected []Instruction) {
+	bytecode, err := Parse([]byte(input))
+	if err != nil {
+		t.Fatalf("parsing error %+v", err)
+	}
+
+	if len(bytecode) != len(expected) {
+		t.Fatalf("wrong bytecode length. want=%+v, got=%+v",
+			len(expected), len(bytecode))
+	}
+
+	for i, inst := range expected {
+		if bytecode[i] != inst {
+			t.Errorf("wrong instruction. want=%+v, got=%+v", inst, bytecode[i])
+		}
+	}
+}
+
 func TestParse(t *testing.T) {
 	input := `
 	+++++
@@ -20,20 +38,7 @@ func TestParse(t *testing.T) {
 		{Left, 5},
 	}
 
-	bytecode, err := Parse([]byte(input))
-	if err != nil {
-		t.Fatalf("parsing error %+v", err)
-	}
-
-	if len(bytecode) != len(expected) {
-		t.Fatalf("wrong bytecode length. want=%+v, got=%+v", len(expected), len(bytecode))
-	}
-
-	for i, inst := range expected {
-		if bytecode[i] != inst {
-			t.Errorf("wrong instruction want=%+v, got=%+v", inst, bytecode[i])
-		}
-	}
+	parseTest(input, t, expected)
 }
 
 func TestParseLoops(t *testing.T) {
@@ -50,21 +55,7 @@ func TestParseLoops(t *testing.T) {
 		{Plus, 1},
 	}
 
-	bytecode, err := Parse([]byte(input))
-	if err != nil {
-		t.Fatalf("parsing error %+v", err)
-	}
-
-	if len(bytecode) != len(expected) {
-		t.Fatalf("wrong bytecode length. want=%+v, got=%+v",
-			len(expected), len(bytecode))
-	}
-
-	for i, inst := range expected {
-		if bytecode[i] != inst {
-			t.Errorf("wrong instruction. want=%+v, got=%+v", inst, bytecode[i])
-		}
-	}
+	parseTest(input, t, expected)
 }
 
 func TestParseEverything(t *testing.T) {
@@ -81,19 +72,5 @@ func TestParseEverything(t *testing.T) {
 		{Left, 3},
 	}
 
-	bytecode, err := Parse([]byte(input))
-	if err != nil {
-		t.Fatalf("parsing error %+v", err)
-	}
-
-	if len(bytecode) != len(expected) {
-		t.Fatalf("wrong bytecode length. want=%+v, got=%+v",
-			len(expected), len(bytecode))
-	}
-
-	for i, inst := range expected {
-		if bytecode[i] != inst {
-			t.Errorf("wrong instruction. want=%+v, got=%+v", inst, bytecode[i])
-		}
-	}
+	parseTest(input, t, expected)
 }
