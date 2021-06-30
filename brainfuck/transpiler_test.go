@@ -65,7 +65,6 @@ func TestTranspileFizzBuzz(t *testing.T) {
 	transpileTest("../test_data/fizz_buzz.bf", t)
 }
 
-// Transpiling test timeout
 // func TestTranspileMandelbrot(t *testing.T) {
 // 	transpile("../test_data/mandelbrot.bf", t)
 // }
